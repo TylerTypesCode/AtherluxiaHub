@@ -1,6 +1,7 @@
 from .instances import db, migrate, login_manager
 from .Routes.main import main_bp
 from .Routes.auth import auth_bp
+from .Routes.game import game_bp
 from dotenv import load_dotenv
 from flask_dance.contrib.google import google
 from flask_cors import CORS

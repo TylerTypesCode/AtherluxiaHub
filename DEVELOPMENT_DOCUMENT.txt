@@ -1,0 +1,1765 @@
+Atherluxia Hub - Developer Documentation
+
+
+
+
+Table of Contents
+
+Introduction
+
+
+Overview of Atherluxia Hub
+
+
+Purpose and Goals
+
+
+Target Audience
+
+
+Platform Architecture & System Design
+
+
+High-Level System Architecture
+
+
+Core Features and Components
+
+
+User Journey and Interaction Flow
+
+
+Development Stack
+
+
+Backend: Flask
+
+
+Backend-ORM: Flask-SQLAlchemy
+
+
+Frontend: Jinja2 Templates with TailwindCSS
+
+
+Database: MySQL
+
+
+Third-Party Integrations
+
+
+API Documentation
+
+
+RESTful API Endpoints
+
+
+Authentication and Authorization
+
+
+Data Retrieval and Submission
+
+
+Error Handling
+
+
+Security & Best Practices
+
+
+User Authentication and Authorization
+
+
+Password Management
+
+
+Role-Based Access Control
+
+
+Data Protection and Encryption
+
+
+Secure Coding Practices
+
+
+Development & Scaling
+
+
+Handling High Traffic
+
+
+Database Scaling Strategies
+
+
+Frontend Optimization
+
+
+Caching and Performance Tuning
+
+
+Continuous Integration and Deployment
+
+
+Ongoing Maintenance & Updates
+
+
+Codebase Maintenance
+
+
+Bug Fixes and Feature Requests
+
+
+Versioning and Updates
+
+
+User Feedback Integration
+
+
+Data Models Documentation
+
+
+User Model
+
+
+Game Model
+
+
+Vote Model
+
+
+Comment Model
+
+
+Tag Model
+
+
+Notification Model
+
+
+Follow Model
+
+
+Conclusion
+
+
+Summary of Platform Features and Capabilities
+
+
+Future Enhancements and Roadmap
+
+
+Acknowledgments
+
+
+
+
+
+
+
+
+1. Introduction
+	Project Name: Atherluxia Hub
+ Platform Type: Web Application
+ Target Audience: Indie Game Developers, Players, and Enthusiasts
+ Launch Date: TBD
+ Version: 1.0 (Initial Development)
+
+Overview
+Atherluxia Hub is a community-driven platform designed to provide a launchpad for indie game developers to showcase their work, engage with their target audience, and receive valuable feedback that can drive further iteration and development. It operates similarly to Product Hunt but is specifically tailored to the indie game space, offering a dynamic environment for developers to present their projects, share updates, and receive real-time feedback from an engaged and enthusiastic community.
+The platform aims to bridge the gap between indie game developers and gamers, creating a unique space where developers can connect directly with their users. Atherluxia Hub allows game creators to launch new titles, share progress updates, and build a community around their games. For players, it serves as a curated space to discover fresh indie titles, provide feedback, and support developers in their journey.
+
+Mission Statement
+Our mission is to empower indie game developers by providing a dedicated platform that fosters discovery, collaboration, and growth. Atherluxia Hub seeks to inspire creativity, provide transparency, and nurture relationships between developers and their community. By promoting indie games and supporting developers in their endeavors, we aim to cultivate a thriving ecosystem that encourages innovation and excellence in the gaming industry.
+
+Key Features
+Game Showcases: Developers can create detailed project pages to showcase their indie games with media, descriptions, and key features.
+
+
+Community Interaction: Players and fellow developers can comment, upvote, and share their thoughts on each game, fostering engagement and feedback.
+
+
+Voting & Ranking System: Community members can vote on games, giving rise to a daily or weekly leaderboard that showcases the most popular or promising games.
+
+
+Developer Tools: Custom dashboards for developers to track user interactions, feedback, votes, and overall engagement with their projects.
+
+
+Release Announcements: Developers can announce new releases, updates, and upcoming features, keeping their audience in the loop.
+
+
+Search & Discovery: Players can browse games by category, genre, platform, or release date, making it easier to discover new indie titles.
+
+
+
+Why Atherluxia Hub?
+The indie game space is ever-expanding, and with the rise of crowd-sourced platforms, it is more crucial than ever for indie developers to carve out their own presence. Atherluxia Hub provides a focused environment that showcases indie games while fostering a sense of community. Unlike large platforms where indie titles may get lost among thousands of mainstream games, Atherluxia Hub offers tailored visibility for creators, giving them the tools they need to build meaningful relationships with their audience.
+Our platform’s combination of community engagement, real-time feedback, and discovery mechanisms aims to offer developers not just a place to showcase their games but also a space to grow and iterate with the support of a like-minded community. For players, Atherluxia Hub becomes a go-to destination for discovering unique and innovative games that may not receive the same level of exposure on other, more mainstream platforms.
+
+Target Audience
+Atherluxia Hub is designed for both indie game developers and players with the following core groups in mind:
+Indie Game Developers: Independent developers, small studios, and solo creators who are looking for a platform to showcase their games, receive constructive feedback, and engage with potential players.
+
+
+Gaming Enthusiasts: Players who love discovering new and innovative indie titles, providing feedback, and supporting the indie game development community.
+
+
+Content Creators: YouTubers, streamers, and bloggers who specialize in indie game content and wish to explore new projects and introduce them to their followers.
+
+
+
+Goals & Vision
+Atherluxia Hub’s long-term vision is to become the premier platform for indie game discovery and community interaction. Our primary goals are to:
+Support Indie Game Developers: Provide a platform where developers can thrive, get feedback, and access tools to manage their projects more effectively.
+
+
+Facilitate Community Engagement: Foster an active and engaged community of players and developers who can interact, provide support, and collaborate.
+
+
+Promote Discovery: Ensure that every indie game, regardless of size, has an opportunity to shine through effective discovery and feedback systems.
+
+
+Build a Sustainable Ecosystem: Create a self-sustaining platform that continues to grow and evolve in line with the needs of its users.
+
+
+
+
+
+2. Platform Architecture & System Design
+System Overview
+Atherluxia Hub is designed as a scalable, modular platform built on modern web technologies, ensuring a smooth and responsive user experience. The system’s architecture is divided into multiple layers, each responsible for specific components of the platform’s functionality. This ensures the platform is maintainable, extensible, and capable of handling the evolving needs of its users.
+
+High-Level Architecture
+Atherluxia Hub’s architecture follows a layered approach, with distinct tiers for the frontend, backend, and data management:
+Frontend (Client-Side):
+ The frontend is built using modern JavaScript frameworks (React or Vue.js) and styled using Tailwind CSS to ensure a responsive and aesthetically pleasing design. The frontend communicates with the backend via RESTful APIs to retrieve and submit data.
+
+
+Backend (Server-Side):
+ The backend is powered by Flask, a lightweight Python web framework that provides flexibility and scalability. Flask is chosen for its simplicity and ease of integration with external APIs and services. The backend handles authentication, user data management, and the processing of game submissions and feedback.
+
+
+Database:
+ The platform utilizes PostgreSQL as the relational database management system, providing robust storage for user data, game details, votes, comments, and other key platform elements. PostgreSQL’s scalability and reliability make it ideal for handling large volumes of data.
+
+
+Caching & Performance:
+ To improve the performance and reduce latency, Redis is used for caching frequently requested data, such as game listings, votes, and community comments. This minimizes the load on the database and speeds up content delivery.
+
+
+Media Storage:
+ All game assets, including screenshots, videos, and downloadable files, are stored on a cloud-based file storage system, such as Amazon S3. This allows for easy scaling and ensures fast, reliable access to game media.
+
+
+Authentication & Authorization:
+ Users will authenticate via OAuth (e.g., Google, Facebook) or traditional email/password methods. The platform ensures secure user authentication with JWT (JSON Web Tokens) for session management and role-based access control (RBAC) to limit access to sensitive data.
+
+
+
+System Components & Services
+User Management Service
+ Handles user registration, login, and profile management. It also supports social login integrations (Google, Facebook, etc.) and ensures secure password storage using bcrypt hashing.
+
+
+Game Submission Service
+ This service allows indie developers to submit their games for listing on the platform. The service includes form validation, file uploads for media assets, and automatic metadata extraction from the game files.
+
+
+Voting & Ranking Service
+ Responsible for managing votes from community members, updating the leaderboard rankings, and maintaining the integrity of voting data. This service prevents abuse such as fake votes and ensures only registered users can vote.
+
+
+Commenting & Feedback Service
+ A crucial service that allows users to leave comments, suggestions, and feedback on games. It supports real-time notifications to developers when feedback is left on their projects.
+
+
+Notification Service
+ This service manages email notifications, in-app alerts, and push notifications for key events, such as new votes, comments, or updates from developers on games they are following.
+
+
+Search & Discovery Service
+ Implements a fast and responsive search engine, enabling users to search for games by category, genre, platform, or keywords. This service utilizes Elasticsearch for full-text search and filtering capabilities.
+
+
+Analytics & Reporting Service
+ Provides detailed reports and dashboards for developers, showing metrics such as game performance, user engagement, votes, comments, and traffic sources. These insights help developers improve their games and marketing strategies.
+
+
+Content Delivery Network (CDN)
+ All static assets, such as images, JavaScript files, and CSS files, are served via a CDN to improve load times and ensure high availability.
+
+
+
+Data Flow
+User Journey:
+ A typical user journey on Atherluxia Hub involves the following steps:
+
+
+The user visits the homepage, where they can browse featured and new indie games.
+
+
+They can log in using an account or sign up if they are new.
+
+
+After logging in, they can interact with game listings by voting, commenting, or following their favorite games.
+
+
+Developers can submit new games, track their game's progress via the dashboard, and respond to feedback.
+
+
+Game Submission Flow:
+
+
+A developer submits their game, filling out a submission form with basic game information (name, description, tags, etc.) and uploading media assets.
+
+
+The backend validates the form and stores the game data in the database.
+
+
+The game is then made live, and users can begin interacting with it.
+
+
+Voting Flow:
+
+
+Users vote for games they like.
+
+
+Votes are recorded and stored in the database.
+
+
+The leaderboard is updated accordingly, showing the most voted games.
+
+
+Commenting Flow:
+
+
+Users post comments or feedback on games.
+
+
+The comment is stored in the database and associated with the correct game.
+
+
+The developer is notified of new feedback via email or in-app alerts.
+
+
+
+Scalability Considerations
+The platform is designed to be scalable, accommodating future growth as more games are submitted and the user base expands. Key scalability features include:
+Horizontal Scaling: The backend is designed to scale horizontally by adding more instances of the application server as demand increases.
+
+
+Database Sharding: As the platform grows, the database can be partitioned across multiple servers, ensuring high availability and load distribution.
+
+
+Content Delivery Network (CDN): By utilizing a CDN for static assets, Atherluxia Hub can serve users around the world with low latency and high availability.
+
+
+3. Development Stack
+Overview
+Atherluxia Hub is built using a modern, scalable, and maintainable tech stack. The following describes the core technologies used in both the frontend and backend of the platform, along with their respective roles in the system. Each component was selected to ensure the platform is performant, secure, and flexible, enabling rapid development and future scalability.
+
+Backend Technology
+Flask (Web Framework)
+ Flask is a lightweight Python web framework that serves as the core of Atherluxia Hub’s backend. Flask was chosen due to its simplicity, modularity, and ease of use, which makes it ideal for building RESTful APIs and managing user requests. Flask provides all the necessary tools for routing, middleware, and HTTP request handling, while allowing flexibility to integrate with other libraries for database management, authentication, and security.
+
+
+Key Benefits:
+
+
+Simple and lightweight: Minimal boilerplate code, allowing rapid development.
+
+
+Extensible: Easily integrates with other services, including caching (Redis), database (MySQL), and external APIs.
+
+
+Robust support for RESTful API design.
+
+
+Flask-SQLAlchemy (ORM for Database Management)
+ Flask-SQLAlchemy is an extension that integrates the SQLAlchemy ORM with Flask. It provides a high-level, Pythonic interface for interacting with the relational database, simplifying tasks such as querying, inserting, updating, and deleting records. Flask-SQLAlchemy also provides automatic schema migrations through Flask-Migrate, which helps in evolving the database schema as the platform grows.
+
+
+Key Benefits:
+
+
+Object-relational mapping: Allows developers to work with Python objects instead of raw SQL queries, reducing complexity.
+
+
+Schema migrations: Easily manage database schema changes with version control.
+
+
+Flexible querying: Supports complex queries and relationships between models.
+
+
+
+Frontend Technology
+Jinja2 (Template Engine)
+ Jinja2 is a templating engine for Python used to dynamically generate HTML content. It is tightly integrated with Flask and allows for easy rendering of HTML pages. Jinja2 templates help separate the logic of data processing from the presentation layer, ensuring a cleaner, more maintainable codebase. Atherluxia Hub utilizes Jinja2 templates to render dynamic pages such as game listings, user dashboards, and submission forms.
+
+
+Key Benefits:
+
+
+Separation of concerns: Jinja2 helps maintain a clean separation between backend logic and frontend presentation.
+
+
+Templating capabilities: Provides inheritance, control structures (loops, conditionals), and easy variable interpolation.
+
+
+Flexibility: Easily integrates with Flask, enabling efficient page rendering.
+
+
+base.html Layout Template
+ The base.html template serves as the primary layout template for the frontend of Atherluxia Hub. It contains common structure elements that are reused across different pages, such as the navigation bar, footer, and meta tags. This layout template allows for consistency across the platform and helps avoid redundancy in the code.
+
+
+Key Benefits:
+
+
+Centralized structure: Reduces duplication and ensures a consistent look and feel across all pages.
+
+
+Easy to extend: New pages can simply inherit from base.html, ensuring uniformity and ease of future updates.
+
+
+TailwindCSS (Utility-First CSS Framework)
+ TailwindCSS is a utility-first CSS framework that provides a set of low-level utility classes to build custom designs without having to write custom CSS from scratch. It allows developers to design highly responsive, modern layouts with minimal effort. TailwindCSS is integrated into the platform to create a responsive, visually appealing, and user-friendly interface for both desktop and mobile devices.
+
+
+Key Benefits:
+
+
+Flexibility: Allows for rapid UI development and customization.
+
+
+Responsiveness: Built-in utilities make it easy to create responsive layouts across different screen sizes.
+
+
+Efficiency: Reduces the need to write custom CSS, leading to cleaner code and faster development.
+
+
+
+Database Technology
+MySQL (Relational Database Management System)
+ MySQL is the relational database management system (RDBMS) used to store and manage data for Atherluxia Hub. MySQL was selected for its scalability, reliability, and extensive support within the Python ecosystem. It provides a robust system for handling complex queries, relational data, and ensuring data integrity across the platform.
+
+
+Key Benefits:
+
+
+Scalability: MySQL can handle large datasets and support growth as Atherluxia Hub’s user base expands.
+
+
+Performance: Optimized for high-speed query execution and efficient data storage.
+
+
+ACID compliance: Ensures that all database transactions are processed reliably and consistently.
+
+
+Database Schema Overview:
+ The database schema is designed to store key entities such as users, games, votes, comments, and game submissions. Tables are structured with relationships to ensure that the platform’s core functionality, such as user interaction with games, can be efficiently managed. Primary entities and relationships include:
+
+
+Users: Stores user profile information, including authentication credentials, preferences, and activity.
+
+
+Games: Stores game details, such as title, description, media links, category, and developer info.
+
+
+Votes: Tracks user votes on games, ensuring that votes are stored efficiently and counted for leaderboard rankings.
+
+
+Comments: Stores user feedback and comments related to specific games, allowing for developer responses.
+
+
+Submissions: Stores information about game submissions, including metadata, media uploads, and submission timestamps.
+
+
+
+Additional Technologies
+Redis (Caching Layer):
+ Redis is employed to cache frequently accessed data such as game listings, leaderboard rankings, and user data. By reducing the load on the MySQL database, Redis helps maintain fast response times and improves the overall performance of the platform.
+
+
+Celery (Asynchronous Task Queue):
+ Celery is used to handle background tasks such as sending notifications, processing file uploads, and handling time-consuming operations like image resizing or media processing. Celery ensures that these tasks do not block the main application’s request-response cycle, allowing for a smooth user experience.
+
+
+JWT (JSON Web Tokens):
+ JSON Web Tokens (JWT) are used for secure user authentication and authorization. JWTs are passed between the frontend and backend to ensure that users are authenticated for protected routes and actions. The use of JWT allows for stateless authentication, meaning there is no need to store session data on the server.
+
+
+
+Integration with Third-Party Services
+Atherluxia Hub integrates with several third-party services to enhance the platform’s functionality:
+OAuth Providers (Google, Facebook):
+ Users can sign up or log in using their Google or Facebook accounts, making the registration process faster and more convenient.
+
+
+Cloud Storage (Amazon S3):
+ All media assets, such as images and videos, are stored on Amazon S3 for reliable and scalable storage. This ensures that game developers can easily upload and manage large media files.
+
+
+SendGrid (Email Notifications):
+ SendGrid is used for sending email notifications to users, such as confirmation emails, game updates, and notifications about new feedback or votes.
+
+
+
+4. API Documentation
+Overview
+The Atherluxia Hub platform exposes a set of RESTful APIs that allow external clients (such as the frontend) to interact with the system. The APIs provide access to core functionalities, including user authentication, game submissions, votes, comments, and notifications. This section provides detailed documentation for each of the API endpoints, including request and response formats, query parameters, and error handling.
+
+Authentication & Authorization
+POST /api/auth/login
+ This endpoint is used to authenticate users and issue a JSON Web Token (JWT) for session management.
+
+ Request:
+
+ json
+CopyEdit
+{
+  "email": "user@example.com",
+  "password": "your_password"
+}
+ Response:
+
+
+200 OK: Successfully authenticated, returns a JWT token.
+
+ json
+CopyEdit
+{
+  "token": "jwt_token_here"
+}
+
+
+401 Unauthorized: Invalid credentials.
+
+ json
+CopyEdit
+{
+  "error": "Invalid credentials"
+}
+
+
+POST /api/auth/register
+ This endpoint allows new users to register. It accepts an email, password, and optional display name.
+
+ Request:
+
+ json
+CopyEdit
+{
+  "email": "newuser@example.com",
+  "password": "your_password",
+  "display_name": "New User"
+}
+ Response:
+
+
+201 Created: Successfully created a new user.
+
+ json
+CopyEdit
+{
+  "message": "User created successfully"
+}
+
+
+400 Bad Request: Invalid data (e.g., missing or invalid fields).
+
+ json
+CopyEdit
+{
+  "error": "Invalid input data"
+}
+
+
+
+User Profile
+GET /api/users/me
+ Fetch the currently authenticated user's profile data.
+
+ Request:
+
+
+Header: Authorization: Bearer <jwt_token>
+
+
+Response:
+
+
+200 OK: Returns the user’s profile.
+
+ json
+CopyEdit
+{
+  "id": 1,
+  "email": "user@example.com",
+  "display_name": "User Name",
+  "profile_picture": "https://path_to_picture.jpg"
+}
+
+
+
+Games
+GET /api/games
+ Fetch a list of games with optional filtering options, such as categories or search terms.
+
+ Request:
+
+
+Query Parameters:
+
+
+category: (optional) Filter by game category (e.g., RPG, Shooter).
+
+
+search: (optional) Search term for game names or descriptions.
+
+
+sort_by: (optional) Sorting criteria (e.g., votes, newest).
+
+
+Response:
+
+
+200 OK: List of games that match the filter criteria.
+
+ json
+CopyEdit
+{
+  "games": [
+    {
+      "id": 1,
+      "name": "Game Title",
+      "description": "A brief description of the game.",
+      "category": "RPG",
+      "developer": "Developer Name",
+      "votes": 250,
+      "media": "https://path_to_image_or_video.jpg"
+    },
+    ...
+  ]
+}
+
+
+POST /api/games
+ Submit a new game to the platform. Developers must be authenticated to submit a game.
+
+ Request:
+
+
+Header: Authorization: Bearer <jwt_token>
+
+
+Body:
+
+ json
+CopyEdit
+{
+  "name": "Game Title",
+  "description": "Detailed description of the game.",
+  "category": "RPG",
+  "media": "https://link_to_screenshot_or_video.jpg"
+}
+
+
+Response:
+
+
+201 Created: Successfully submitted the game.
+
+ json
+CopyEdit
+{
+  "message": "Game submitted successfully",
+  "game_id": 1
+}
+
+
+400 Bad Request: Invalid game data (e.g., missing fields).
+
+ json
+CopyEdit
+{
+  "error": "Invalid game data"
+}
+
+
+GET /api/games/{game_id}
+ Fetch detailed information about a specific game using its ID.
+
+ Request:
+
+
+Path Parameters:
+
+
+game_id: The unique ID of the game.
+
+
+Response:
+
+
+200 OK: Returns detailed game information.
+
+ json
+CopyEdit
+{
+  "id": 1,
+  "name": "Game Title",
+  "description": "Detailed description of the game.",
+  "category": "RPG",
+  "developer": "Developer Name",
+  "media": "https://path_to_image_or_video.jpg",
+  "votes": 250,
+  "comments": [
+    {
+      "user": "Commenter Name",
+      "text": "This game is amazing!"
+    },
+    ...
+  ]
+}
+
+
+
+Voting & Ranking
+POST /api/games/{game_id}/vote
+ Allows authenticated users to vote for a specific game. Users can only vote once per game.
+
+ Request:
+
+
+Header: Authorization: Bearer <jwt_token>
+
+
+Path Parameters:
+
+
+game_id: The unique ID of the game.
+
+
+Response:
+
+
+200 OK: Successfully voted for the game.
+
+ json
+CopyEdit
+{
+  "message": "Vote recorded successfully"
+}
+
+
+400 Bad Request: The user has already voted for this game.
+
+ json
+CopyEdit
+{
+  "error": "You have already voted for this game"
+}
+
+
+GET /api/games/leaderboard
+ Fetch the top games based on the number of votes.
+
+ Request:
+
+
+Query Parameters: limit (optional) - Limit the number of games to retrieve.
+
+
+Response:
+
+
+200 OK: List of top games based on votes.
+
+ json
+CopyEdit
+{
+  "leaderboard": [
+    {
+      "id": 1,
+      "name": "Game Title",
+      "votes": 500
+    },
+    ...
+  ]
+}
+
+
+
+Comments & Feedback
+POST /api/games/{game_id}/comment
+ Allows users to leave comments or feedback on a specific game.
+
+ Request:
+
+
+Header: Authorization: Bearer <jwt_token>
+
+
+Path Parameters:
+
+
+game_id: The unique ID of the game.
+
+
+Body:
+
+ json
+CopyEdit
+{
+  "text": "This is my feedback about the game!"
+}
+
+
+Response:
+
+
+201 Created: Successfully posted the comment.
+
+ json
+CopyEdit
+{
+  "message": "Comment posted successfully"
+}
+
+
+GET /api/games/{game_id}/comments
+ Fetch all comments associated with a specific game.
+
+ Request:
+
+
+Path Parameters:
+
+
+game_id: The unique ID of the game.
+
+
+Response:
+
+
+200 OK: List of comments for the game.
+
+ json
+CopyEdit
+{
+  "comments": [
+    {
+      "user": "Commenter Name",
+      "text": "Great game!"
+    },
+    ...
+  ]
+}
+
+
+
+Error Handling
+All API responses include appropriate HTTP status codes to indicate success or failure. In the case of an error, the API will return a message explaining the error.
+Common Error Responses:
+
+
+400 Bad Request: The request is malformed or missing required data.
+
+
+401 Unauthorized: Authentication is required, or the token has expired.
+
+
+404 Not Found: The requested resource does not exist.
+
+
+500 Internal Server Error: A server-side error occurred.
+
+
+
+5. Security & Best Practices
+Overview
+Security is a critical component of Atherluxia Hub. Given the nature of the platform, which facilitates user interactions, game submissions, votes, and comments, ensuring data privacy, secure user authentication, and protection from malicious activity is paramount. This section outlines the platform's security architecture, key practices, and guidelines for developers to follow when working with the platform.
+
+Authentication and Authorization
+JSON Web Tokens (JWT)
+ Atherluxia Hub uses JSON Web Tokens (JWT) for stateless authentication. After a user logs in, a JWT is generated and returned to the client. This token is then included in subsequent API requests to verify the user’s identity. JWTs are stored securely on the client-side (usually in HTTP-only cookies or local storage).
+
+
+JWT Expiration: Tokens have an expiration time (e.g., 1 hour), after which the user must log in again to receive a new token. This helps mitigate the risk of token theft.
+
+
+Secure Storage: For frontend security, store JWTs in HTTP-only cookies to prevent cross-site scripting (XSS) attacks.
+
+
+Token Refresh: Implement a token refresh strategy for longer user sessions. When the token expires, the client can request a new token using a refresh token, which also has an expiration time.
+
+
+OAuth Authentication
+ To allow users to authenticate using third-party services (such as Google or Facebook), OAuth 2.0 is employed. OAuth reduces friction for users while maintaining secure login procedures. When implementing OAuth, ensure that:
+
+
+Access tokens are securely stored and never exposed to the frontend.
+
+
+OAuth tokens are validated before granting access to the user’s account data.
+
+
+Role-based Access Control (RBAC)
+ Although Atherluxia Hub’s current user roles are limited to general users and developers, the platform is designed to allow the easy addition of more roles in the future. Access to certain resources (e.g., game submission, admin settings) is controlled through role-based access policies.
+
+
+
+Data Protection & Encryption
+Encryption at Rest
+ All sensitive data stored in the database, including user passwords and game-related media, is encrypted at rest. For passwords, a strong hashing algorithm (e.g., bcrypt) is used, ensuring that even if the database is compromised, password information cannot be easily recovered.
+
+
+Encryption in Transit
+ The platform uses TLS/SSL encryption to secure all data transmitted between clients and the server. This protects user data, such as passwords and personal information, from interception during transmission.
+
+
+Ensure that the server forces HTTPS connections by redirecting all HTTP requests to HTTPS.
+
+
+Use certificates from a trusted Certificate Authority (CA) to avoid man-in-the-middle (MITM) attacks.
+
+
+
+Database Security
+SQL Injection Prevention
+ SQL injection attacks are one of the most common threats to web applications. To prevent SQL injection:
+
+
+Use an ORM like SQLAlchemy to abstract SQL queries and avoid directly writing raw SQL queries.
+
+
+Always use parameterized queries when interacting with the database to ensure that user input is treated as data, not executable code.
+
+
+Database Access Control
+ Ensure that access to the database is restricted based on the principle of least privilege. Database accounts should only have the permissions necessary to perform their specific tasks, reducing the impact of potential security breaches.
+
+
+
+User Data Privacy
+Personal Data Minimization
+ Atherluxia Hub aims to collect the minimal amount of personal data necessary for user registration and interaction. This includes:
+
+
+Email address (for authentication and communication).
+
+
+Display name (for personalization).
+
+
+Profile picture (optional).
+
+
+Avoid storing unnecessary sensitive data, such as payment information, unless required by specific features. When possible, integrate with third-party services for payments or subscriptions (e.g., Stripe, PayPal) to offload sensitive financial data handling.
+
+
+Privacy Settings
+ Users have the option to configure their privacy settings. For example, they can:
+
+
+Control who can view their profile information.
+
+
+Control the visibility of their comments and game votes.
+
+
+Choose whether they want to receive email notifications.
+
+
+
+Best Practices for API Integration
+Rate Limiting
+ To prevent abuse and ensure fair use of API resources, Atherluxia Hub employs rate limiting. This limits the number of API requests that can be made by a user within a specific time frame (e.g., 100 requests per hour).
+
+
+Rate limiting helps protect the platform from DDoS attacks and ensures that system resources are distributed fairly.
+
+
+API Throttling
+ In addition to rate limiting, API throttling is used to control the flow of requests to prevent server overload. Throttling involves slowing down requests if the system detects that too many requests are being made in a short time span.
+
+
+Input Validation and Sanitization
+ Every incoming API request should be validated to ensure that the data is in the correct format and within the expected range. This includes:
+
+
+Ensuring that all user inputs (e.g., names, email addresses, and comments) are properly sanitized to avoid XSS (cross-site scripting) and other injection attacks.
+
+
+Using libraries and frameworks that automatically sanitize data, such as Flask-WTF for form validation and SQLAlchemy for ORM-driven data validation.
+
+
+CORS (Cross-Origin Resource Sharing) Policies
+ Atherluxia Hub implements strict CORS policies to ensure that API requests are only accepted from trusted origins. This prevents unauthorized websites from making API requests to the platform on behalf of users, protecting against cross-site request forgery (CSRF) attacks.
+
+
+
+Secure Media Handling
+File Upload Security
+ Atherluxia Hub allows users to upload media files (e.g., screenshots, game videos). To secure file uploads:
+
+
+Only allow specific file types (e.g., .jpg, .png, .mp4) to prevent malicious files (e.g., executables) from being uploaded.
+
+
+Perform virus scanning on all uploaded files using services like ClamAV or integrate with a third-party security service.
+
+
+Limit file size to prevent denial of service (DoS) attacks that exploit large file uploads.
+
+
+Storage and Access Control
+ Media files are stored securely on Amazon S3, and access to these files is controlled using secure access keys. Ensure that access to media files is granted only to users who have permission to view or modify them.
+
+
+
+Handling Security Vulnerabilities
+Regular Security Audits
+ Atherluxia Hub conducts regular security audits to identify and address potential vulnerabilities. These audits involve both automated scanning tools and manual code reviews. Critical security patches are promptly applied.
+
+
+Bug Bounty Program
+ Atherluxia Hub encourages ethical hacking and offers rewards for discovering vulnerabilities in the system. The bug bounty program helps ensure that any potential security issues are identified and resolved before they can be exploited.
+
+
+Logging and Monitoring
+ All system activities, such as login attempts, file uploads, and database queries, are logged to a centralized logging system. This helps identify suspicious activity and allows the security team to respond swiftly in case of a breach.
+
+
+
+Security Recommendations for Developers
+Use Secure Passwords: When setting passwords for your local development environment or production servers, use a password manager to generate and store strong passwords.
+
+
+Do Not Expose Sensitive Information: Always make sure that sensitive information (such as API keys, database credentials, etc.) is not exposed in public repositories or frontend code. Use environment variables and encrypted storage for these credentials.
+
+
+Use HTTPS Everywhere: Ensure that all communication with the API is done over HTTPS. Do not expose any unencrypted endpoints.
+
+
+
+6. Deployment & Scaling
+
+Overview
+In this section, we will detail the deployment strategies, environment setup, and scaling practices for Atherluxia Hub. Given the dynamic nature of the platform, it is important to ensure that it can scale effectively to handle growth in user base and game submissions while maintaining high performance and availability. This page covers the best practices for deploying Atherluxia Hub to production, managing environment variables, and scaling the system as demand increases.
+
+Production Environment Setup
+Atherluxia Hub is designed to be deployed on cloud services such as AWS, Google Cloud, or any other cloud platform with infrastructure-as-a-service (IaaS) capabilities. Below is an outline of the environment setup for deploying Atherluxia Hub:
+Web Server (Gunicorn)
+ Atherluxia Hub uses Gunicorn as the WSGI HTTP server to serve the Flask application. Gunicorn is a robust choice for serving Python web applications, as it is compatible with multi-threaded and multi-process configurations.
+
+ Configuration:
+
+
+Number of workers: The number of Gunicorn workers should be based on the number of CPU cores available on the server (e.g., workers = 2 * CPU + 1).
+
+
+Binding: Bind Gunicorn to the appropriate socket or IP address.
+
+
+Timeout: Set appropriate timeouts to prevent long-running requests from hanging indefinitely.
+
+
+Example Gunicorn command for launching the application:
+
+ bash
+CopyEdit
+gunicorn -w 4 -b 0.0.0.0:8000 app:app
+
+
+Reverse Proxy (Nginx)
+ Nginx will act as a reverse proxy to handle incoming requests and forward them to the Gunicorn application. Nginx also provides SSL termination, load balancing, and can serve static assets directly to reduce the load on Gunicorn.
+
+ Configuration:
+
+
+Set up SSL/TLS using Let's Encrypt or a commercial certificate to ensure all traffic is encrypted.
+
+
+Use Nginx to forward requests to Gunicorn, ensuring that the Flask application is behind a secure proxy.
+
+
+Example Nginx configuration:
+
+ nginx
+CopyEdit
+server {
+    listen 80;
+    server_name atherluxia.com;
+    return 301 https://$host$request_uri;
+}
+
+server {
+    listen 443 ssl;
+    server_name atherluxia.com;
+
+    ssl_certificate /etc/letsencrypt/live/atherluxia.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/atherluxia.com/privkey.pem;
+
+    location / {
+        proxy_pass http://127.0.0.1:8000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
+
+
+Database (MySQL)
+ The platform uses MySQL for production-level database management. The MySQL server should be deployed on a separate server or managed database service (e.g., Amazon RDS, Google Cloud SQL) for reliability and scalability.
+
+ Configuration:
+
+
+Set up regular backups for the database to avoid data loss.
+
+
+Implement database replication (master-slave) to ensure availability and reliability.
+
+
+Enable database monitoring to track performance and detect issues (e.g., slow queries).
+
+
+
+Environment Variables & Secrets Management
+To manage sensitive data and configuration settings, it is crucial to use environment variables and a secure secrets management system.
+Environment Variables
+ All sensitive information such as database credentials, JWT secret keys, and API keys should be stored as environment variables. In production, you can use tools like dotenv or the platform's built-in secrets management system (e.g., AWS Secrets Manager or Google Cloud Secret Manager) to securely manage these variables.
+
+ Example environment variables:
+
+ bash
+CopyEdit
+FLASK_APP=app.py
+FLASK_ENV=production
+DATABASE_URL=mysql://user:password@hostname/dbname
+JWT_SECRET_KEY=your-secret-key
+
+
+Secrets Management
+ Using a dedicated secrets manager helps prevent hardcoding sensitive information in source code. Cloud providers like AWS, Google Cloud, and Azure have native secrets management tools that securely store and access credentials.
+
+
+
+CI/CD Pipeline
+Continuous Integration (CI) and Continuous Deployment (CD) are essential for maintaining quality, efficiency, and rapid updates in production. A typical CI/CD pipeline for Atherluxia Hub will involve automated testing, building, and deployment steps.
+CI Tools
+ Popular CI tools like GitHub Actions, GitLab CI, or CircleCI can be used to automate the deployment pipeline. The pipeline should include the following steps:
+
+
+Code Linting: Run linters (e.g., flake8) to ensure consistent code quality.
+
+
+Unit Tests: Run unit tests using frameworks like pytest to ensure that the application behaves as expected.
+
+
+Build Docker Image: If the platform is containerized, the pipeline should build and push Docker images to a container registry.
+
+
+Deploy to Staging: Deploy the application to a staging environment for final testing before production deployment.
+
+
+Example CI pipeline:
+
+ yaml
+CopyEdit
+name: CI Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v2
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Run Tests
+      run: pytest
+    - name: Deploy to Staging
+      run: |
+        docker build -t atherluxia-hub .
+        docker-compose -f docker-compose.prod.yml up -d
+
+
+CD Pipeline
+ For CD, the pipeline will automatically deploy changes to the production environment after successful tests and staging deployment. This can be done with minimal human intervention, ensuring that the latest stable version of the platform is always available in production.
+
+
+Use tools like AWS CodePipeline or Google Cloud Build to deploy the application automatically after successful testing.
+
+
+
+Scaling
+As Atherluxia Hub grows, the platform should be able to handle more users, game submissions, votes, and interactions. Here are some strategies to scale the system effectively:
+Horizontal Scaling
+ Horizontal scaling involves adding more instances of the web server (Gunicorn workers) and database servers. Load balancing tools like AWS ELB, Google Cloud Load Balancer, or Nginx can distribute traffic across multiple server instances to balance the load.
+
+
+Add more Gunicorn workers or deploy additional servers to handle increasing traffic.
+
+
+Scale the database by using read replicas to offload read traffic, while writes continue to happen on the primary database instance.
+
+
+Auto-scaling
+ Set up auto-scaling groups to automatically scale the application based on traffic or load metrics. This ensures that the platform can handle traffic spikes (e.g., during major game launches or events) without manual intervention.
+
+
+On AWS, use EC2 Auto Scaling Groups to automatically scale instances based on load.
+
+
+Set up auto-scaling policies based on CPU usage, memory usage, or the number of incoming requests.
+
+
+Caching
+ To reduce database load and improve performance, implement caching at various levels:
+
+
+Use Redis or Memcached to cache frequently accessed data (e.g., top games, game details) at the application level.
+
+
+Cache API responses for common requests to reduce the strain on backend services.
+
+
+Implement HTTP caching headers to allow browsers to cache static assets like images and stylesheets.
+
+
+
+Monitoring & Logging
+Continuous monitoring is essential for identifying performance issues, bugs, and security vulnerabilities in real-time. Atherluxia Hub uses the following strategies:
+Application Performance Monitoring (APM)
+ Tools like New Relic, Datadog, or Sentry can be used to monitor application performance, detect bottlenecks, and track error rates.
+
+
+Track key metrics such as request latency, database query performance, and error rates to ensure that the platform is performing optimally.
+
+
+Logging
+ All critical actions (e.g., user logins, game submissions, API requests) are logged and stored in a centralized logging system (e.g., AWS CloudWatch, ELK Stack).
+
+
+Logs should include user actions, error messages, stack traces, and performance data to assist in troubleshooting.
+
+
+
+
+7. Ongoing Maintenance & Updates
+Overview
+Ongoing maintenance and updates are vital to ensuring Atherluxia Hub remains secure, performant, and relevant as the platform grows and evolves. This page details strategies for managing technical debt, applying software updates, maintaining system performance, and ensuring the platform continues to meet user needs.
+
+Patch Management & Software Updates
+Routine updates and patch management are crucial for ensuring the security and stability of Atherluxia Hub. These updates may include security patches, bug fixes, and new feature releases. The platform must be able to handle frequent deployments and integrate with the CI/CD pipeline seamlessly.
+Automated Dependency Management
+ Use tools like dependabot (for GitHub repositories) or pyup to automatically monitor and update the platform’s dependencies. This reduces the risk of using outdated or vulnerable libraries.
+
+
+Dependencies should be regularly updated, especially security-related packages like Flask, SQLAlchemy, and frontend packages (e.g., TailwindCSS).
+
+
+A pull request workflow should be implemented for reviewing and merging updates.
+
+
+Security Patches
+ It is essential to monitor the platform for security vulnerabilities regularly. Set up alerts for known vulnerabilities using tools such as:
+
+
+OWASP Dependency-Check to scan for vulnerabilities in dependencies.
+
+
+Snyk to monitor both runtime and dependencies for potential issues.
+
+
+Regularly patch any security vulnerabilities that arise, especially around user authentication, data storage, and third-party integrations.
+
+
+Best Practices:
+
+
+Security Audits: Conduct regular security audits and penetration tests.
+
+
+Zero-Downtime Updates: Use blue/green or rolling deployment strategies to ensure no downtime during updates.
+
+
+Backup Before Update: Ensure that a backup of the application and database is taken before any major updates to prevent data loss.
+
+
+Feature Releases & Versioning
+ Implement a clear release management process, using Semantic Versioning (semver) to clearly define breaking changes, features, and fixes.
+
+
+Major versions should represent breaking changes.
+
+
+Minor versions should include backward-compatible features.
+
+
+Patch versions should include bug fixes and minor improvements.
+
+
+Example versioning:
+
+ bash
+CopyEdit
+1.0.0 -> Initial release
+1.1.0 -> New feature added (e.g., new game submission categories)
+1.1.1 -> Bug fixes and improvements
+2.0.0 -> Major updates or breaking changes
+ Feature flags should be utilized for testing new features in production without affecting all users. This approach allows for gradual rollouts, feature testing, and feedback collection.
+
+
+
+Database Maintenance & Optimization
+Atherluxia Hub uses MySQL as the production database. Regular database maintenance is essential to keep the platform running smoothly and efficiently.
+Database Backups
+ Perform regular automated backups of the database, preferably with incremental backups every 24 hours and full backups weekly. Use cloud-native backup solutions (e.g., AWS RDS backups) or external tools like mysqldump for offsite backups.
+
+
+Ensure that backup scripts are scheduled to run during low-traffic periods to minimize the impact on system performance.
+
+
+Database Optimization
+ Periodically perform the following tasks to maintain database performance:
+
+
+Indexing: Review query performance and optimize indexes to speed up frequent queries (e.g., user login, game searches).
+
+
+Database Cleanup: Remove outdated data, archived records, and inactive accounts to prevent database bloat.
+
+
+Query Performance Tuning: Regularly analyze query execution plans (e.g., using EXPLAIN in MySQL) and optimize slow queries.
+
+
+Replication & Failover: Use MySQL replication to set up master-slave configurations, enabling database redundancy and failover for high availability.
+
+
+Data Archiving
+ For older game submissions, user data, or events that are less frequently accessed, implement an archiving strategy. Archived data can be moved to a secondary storage solution or kept in a separate database that is optimized for read-heavy access.
+
+
+
+Performance Monitoring & Scalability
+As Atherluxia Hub grows, continuous monitoring of system performance is crucial to ensure a smooth user experience. Implementing performance monitoring and scaling strategies helps anticipate potential issues before they become major bottlenecks.
+Application Monitoring
+ Use application performance monitoring (APM) tools to keep track of application health, identify bottlenecks, and detect errors. Tools like New Relic, Datadog, and Sentry provide deep insights into application performance.
+
+
+Response Time Monitoring: Track the response time of key pages and actions, such as submitting games, voting, and viewing leaderboards.
+
+
+Error Tracking: Monitor errors such as 500 HTTP responses, database connection failures, and unhandled exceptions.
+
+
+Transaction Tracing: Trace user transactions (e.g., sign-ups, game submissions) to identify slow or error-prone steps in the process.
+
+
+Scalability Review
+ As traffic increases, Atherluxia Hub will need to scale. Review server utilization, traffic patterns, and database performance to determine when scaling is needed. Here are some strategies to handle growth:
+
+
+Horizontal Scaling: Use cloud auto-scaling groups (e.g., AWS Auto Scaling) to scale out web servers and application instances as demand increases.
+
+
+Load Balancing: Implement a load balancing solution (e.g., AWS Elastic Load Balancer) to distribute traffic evenly across instances, ensuring no single server becomes a bottleneck.
+
+
+Database Scaling: Use read replicas for MySQL to distribute read traffic and reduce the load on the primary database. Additionally, consider partitioning tables for large datasets.
+
+
+Caching Layer: Integrate caching mechanisms like Redis or Memcached for storing frequently accessed data, such as popular game pages, user profiles, and leaderboard results.
+
+
+
+Technical Debt Management
+Technical debt accumulates over time as features are added and system changes are made. It's essential to balance feature development with managing technical debt to ensure long-term maintainability.
+Refactoring & Code Quality
+ Regularly revisit and refactor parts of the codebase that are difficult to maintain, prone to bugs, or poorly documented. Implementing coding standards and best practices can help reduce technical debt from the start.
+
+
+Use code review tools and automated static analysis tools (e.g., SonarQube) to identify code smells, complexity, and maintainability issues.
+
+
+Prioritize refactoring legacy code during regular maintenance cycles.
+
+
+Deprecation Management
+ Plan and document the deprecation of features or code. This can include outdated third-party libraries, old API versions, or unused functionality.
+
+
+Deprecation Warnings: Provide clear warnings for deprecated features, ensuring that users and developers are aware of changes.
+
+
+Sunset Policies: Set clear sunset dates for deprecated features or APIs, allowing users and developers to migrate to newer solutions.
+
+
+Documenting Changes
+ Maintain a comprehensive change log and update relevant documentation to reflect any changes or new features. Proper documentation reduces the risk of technical debt accumulating through unclear or inconsistent systems.
+
+
+Keep an updated developer manual, API documentation, and change log for easy reference.
+
+
+
+User Support & Feedback Integration
+Ensuring that Atherluxia Hub meets the needs of its users is critical. Regularly collecting and integrating user feedback will guide platform updates and help prioritize new features.
+User Feedback Loop
+ Implement feedback channels such as surveys, user reviews, and direct support tickets to gather insights from the community. Platforms like Intercom, Zendesk, or Trello can be used to manage feedback and communicate directly with users.
+
+
+Feature Requests: Allow users to submit feature requests and vote on the most popular suggestions.
+
+
+Bug Reporting: Provide a simple, effective bug reporting mechanism for users to report issues they encounter.
+
+
+User Engagement & Community Building
+ Foster an active community by encouraging users to engage with content, share their games, and provide feedback to others. Regularly interact with the community via social media, forums, or newsletters to keep users engaged.
+
+
+Customer Support
+ Ensure a dedicated support team or automated system is in place to address user issues promptly. A knowledge base or FAQ section should be regularly updated to assist users with common problems.
+
+
+
+
+
+8: Date Models Documentation
+Overview
+The foundation of Atherluxia Hub's platform is built upon well-defined data models that reflect the platform’s functionality. These models represent key entities, their relationships, and interactions. This section describes the data models that will be implemented in the backend, how they relate to each other, and how they will support the features of the platform.
+
+1. User Model
+The User model represents a platform user and holds important details such as authentication information, profile data, and associated roles.
+Attributes:
+
+
+id: Integer (Primary Key)
+ A unique identifier for each user.
+
+
+username: String (Unique)
+ The unique username for the user, chosen by the user during registration.
+
+
+email: String (Unique)
+ The user's email address for communication and authentication.
+
+
+password_hash: String
+ A hashed version of the user's password.
+
+
+role: Enum (Choices: 'admin', 'developer', 'user')
+ The role of the user within the platform, determining access and privileges.
+
+
+bio: String (Optional)
+ A short user bio for personalization.
+
+
+profile_picture_url: String (Optional)
+ URL to the user's profile picture.
+
+
+created_at: DateTime
+ The date and time the user account was created.
+
+
+updated_at: DateTime
+ The date and time the user's information was last updated.
+
+
+Relationships:
+
+
+A User can submit multiple games (Game model).
+
+
+A User can cast multiple votes (Vote model).
+
+
+
+2. Game Model
+The Game model represents a game project that has been submitted by a developer to Atherluxia Hub. This model contains detailed information about the game, such as its title, description, genre, and media assets.
+Attributes:
+
+
+id: Integer (Primary Key)
+ A unique identifier for each game.
+
+
+title: String (Required)
+ The title of the game.
+
+
+description: Text
+ A detailed description of the game, outlining its mechanics, objectives, and gameplay features.
+
+
+developer_id: Integer (Foreign Key to User.id)
+ The ID of the user who submitted the game.
+
+
+genre: String
+ The genre of the game (e.g., Action, Adventure, RPG, etc.).
+
+
+platforms: String
+ A list of platforms the game is available on (e.g., PC, Web, Console).
+
+
+cover_image_url: String (Optional)
+ URL to the cover image of the game.
+
+
+release_date: DateTime (Optional)
+ The scheduled release date for the game, if applicable.
+
+
+status: Enum (Choices: 'pending', 'approved', 'rejected')
+ The current status of the game on the platform (whether it's under review, approved for listing, or rejected).
+
+
+created_at: DateTime
+ The date and time the game was submitted to Atherluxia Hub.
+
+
+updated_at: DateTime
+ The date and time the game's information was last updated.
+
+
+Relationships:
+
+
+A Game is submitted by one User (developer).
+
+
+A Game can receive multiple Vote entries from users.
+
+
+A Game can have multiple Comment entries from users.
+
+
+
+3. Vote Model
+The Vote model represents a user's vote on a particular game. Votes help determine which games rise in visibility and which games are favored by the community.
+Attributes:
+
+
+id: Integer (Primary Key)
+ A unique identifier for each vote.
+
+
+user_id: Integer (Foreign Key to User.id)
+ The ID of the user who cast the vote.
+
+
+game_id: Integer (Foreign Key to Game.id)
+ The ID of the game that the user voted for.
+
+
+vote_type: Enum (Choices: 'upvote', 'downvote')
+ The type of vote (upvote for favoriting a game, downvote for disliking a game).
+
+
+created_at: DateTime
+ The date and time the vote was cast.
+
+
+Relationships:
+
+
+A Vote is cast by one User.
+
+
+A Vote is cast on one Game.
+
+
+
+4. Comment Model
+The Comment model allows users to add comments to games. This facilitates discussion and feedback around games, encouraging community engagement.
+Attributes:
+
+
+id: Integer (Primary Key)
+ A unique identifier for each comment.
+
+
+user_id: Integer (Foreign Key to User.id)
+ The ID of the user who wrote the comment.
+
+
+game_id: Integer (Foreign Key to Game.id)
+ The ID of the game the comment is associated with.
+
+
+content: Text
+ The content of the comment.
+
+
+created_at: DateTime
+ The date and time the comment was made.
+
+
+Relationships:
+
+
+A Comment is written by one User.
+
+
+A Comment belongs to one Game.
+
+
+
+5. Tag Model
+The Tag model is used to categorize games by specific keywords or topics, making it easier for users to discover games of interest. Tags can be assigned to multiple games.
+Attributes:
+
+
+id: Integer (Primary Key)
+ A unique identifier for each tag.
+
+
+name: String (Unique, Required)
+ The name of the tag (e.g., 'Action', 'Indie', 'Multiplayer').
+
+
+created_at: DateTime
+ The date and time the tag was created.
+
+
+Relationships:
+
+
+A Tag can be associated with many Game entries (many-to-many relationship).
+
+
+
+6. Notification Model
+The Notification model stores notifications that are sent to users regarding important events, such as game approval, vote status updates, or new comments on their games.
+Attributes:
+
+
+id: Integer (Primary Key)
+ A unique identifier for each notification.
+
+
+user_id: Integer (Foreign Key to User.id)
+ The ID of the user receiving the notification.
+
+
+message: String
+ A brief description of the notification (e.g., "Your game has been approved!").
+
+
+read: Boolean
+ Indicates whether the user has read the notification.
+
+
+created_at: DateTime
+ The date and time the notification was created.
+
+
+Relationships:
+
+
+A Notification is sent to one User.
+
+
+
+7. Follow Model
+The Follow model allows users to follow other users, which could be particularly useful for developers to track other developers, influencers, or favorite games.
+Attributes:
+
+
+id: Integer (Primary Key)
+ A unique identifier for each follow.
+
+
+follower_id: Integer (Foreign Key to User.id)
+ The ID of the user who is following another user.
+
+
+followed_id: Integer (Foreign Key to User.id)
+ The ID of the user who is being followed.
+
+
+Relationships:
+
+
+A Follow is created by one User who follows another User.
+
+
+
+
+
+9. Conclusion
+Summary of Atherluxia Hub Platform
+Atherluxia Hub is an innovative platform designed to serve as a launchpad for indie game developers and the gaming community. Modeled after popular platforms like Product Hunt, it enables developers to showcase their games, engage with users, and receive valuable feedback. The platform’s primary goal is to foster a supportive and vibrant ecosystem where indie games and their creators can thrive.
+The development of Atherluxia Hub is structured around a strong and flexible architecture, utilizing modern web technologies such as Flask, Flask-SQLAlchemy, and TailwindCSS. The system's database, backed by MySQL, supports complex relationships between entities such as users, games, votes, comments, and notifications. This ensures that all features are delivered efficiently and in a user-friendly manner.
+
+Key Takeaways from the Developer Documentation
+Clear Structure: The system is built with a well-organized set of data models that define key entities such as User, Game, Vote, and Comment. These models are designed to facilitate interaction between developers and users, helping to elevate the games showcased on the platform.
+
+
+User-Centric Features: By incorporating features like voting, commenting, following other users, and notifications, Atherluxia Hub ensures active community participation and real-time engagement. Users can discover games they enjoy, interact with developers, and influence the popularity of games on the platform.
+
+
+Scalable Tech Stack: The combination of Flask, Jinja2, Flask-SQLAlchemy, and MySQL ensures that the platform remains highly scalable and maintainable. The use of TailwindCSS ensures the frontend is not only visually appealing but also responsive and accessible across devices.
+
+
+Rich Data Model: The data models are central to the functionality of the platform. From tracking user activities to managing game submissions and interactions, the relational data structures support efficient querying and dynamic content generation, crucial for delivering real-time user experiences.
+
+
+Security and Authentication: Security is prioritized with proper user authentication, role-based access control, and hashed password storage. This allows different types of users—developers, admins, and general users—to have distinct access rights, ensuring both flexibility and security.
+
+
+Modular and Extensible Design: The modular nature of the architecture makes it easy to extend the platform with new features or integrations, allowing Atherluxia Hub to adapt as the indie game development landscape evolves.
+
+
+
+Future Considerations and Roadmap
+As Atherluxia Hub continues to grow, several enhancements can be made to improve both the user experience and the platform's functionality:
+Social Features: Enabling more social interaction, such as direct messaging between developers and users or integrating with other social media platforms for better exposure.
+
+
+Advanced Search and Filtering: Adding more powerful search and filtering features, allowing users to find games based on specific criteria such as genre, release date, or platform.
+
+
+Game Metrics and Analytics: Providing developers with more in-depth metrics, such as engagement stats (e.g., views, comments, votes), to help them understand their audience and improve their games.
+
+
+Monetization Features: Integrating payment gateways for donations, crowdfunding, or in-game purchases for developers to monetize their games directly through the platform.
+
+
+Mobile Application: A companion mobile application could offer users and developers easier access to the platform, allowing them to track updates, vote on games, and engage with the community on the go.
+
+
+
+Acknowledgments
+The development of Atherluxia Hub has been made possible through the collaboration of talented developers, designers, and product managers. We would also like to acknowledge the indie game development community, whose creativity and dedication continue to inspire the evolution of the platform.
+
+Closing Thoughts
+Atherluxia Hub is not just a platform for showcasing indie games—it is a thriving community for creators and gamers to connect, share ideas, and celebrate the world of indie games. As the platform evolves, we look forward to seeing new developers, fresh game concepts, and vibrant discussions that push the boundaries of indie gaming.
+By building a transparent, supportive, and dynamic space for indie game developers, Atherluxia Hub has the potential to become a cornerstone of the indie game development ecosystem, shaping the future of the industry.
+Thank you for taking the time to explore this documentation. If you have any questions, feedback, or suggestions, we invite you to connect with us and be a part of this exciting journey.
+
+End of Developer Documentation
+

@@ -1,3 +1,4 @@
+from .utils.error_handlers import APIError
 from .instances import db, migrate, login_manager
 from .Routes.main import main_bp
 from .Routes.auth import auth_bp
@@ -35,6 +36,12 @@ def create_app():
         scope=['profile', 'email'],
         redirect_url="/auth/google/callback"
     )
+
+    @app.errorhandler(APIError)
+    def handle_api_error(error):
+        response = jsonify(error.to_dict())
+        response.status_code = error.status_code
+        return response
 
     app.register_blueprint(google_bp, url_prefix="/auth/google")
 

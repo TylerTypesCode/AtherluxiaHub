@@ -2,6 +2,7 @@ from .instances import db, migrate, login_manager
 from .Routes.main import main_bp
 from .Routes.auth import auth_bp
 from dotenv import load_dotenv
+from flask_dance.contrib.google import google
 from flask_cors import CORS
 from flask import Flask
 import os
@@ -20,14 +21,29 @@ def create_app():
     app.config['CORS_ALLOW_METHODS'] = ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
     app.config['CORS_ALLOW_ORIGINS'] = ['*']
     app.config['CORS_MAX_AGE'] = 3600
+    app.config['GOOGLE_CLIENT_ID'] = os.getenv('GOOGLE_CLIENT_ID')
+    app.config['GOOGLE_CLIENT_SECRET'] = os.getenv('GOOGLE_CLIENT_SECRET')
+
+    def init_oauth(app):
+    google_bp = make_google_blueprint(
+        client_id=app.config['GOOGLE_CLIENT_ID'],
+        client_secret=app.config['GOOGLE_CLIENT_SECRET'],
+        scope=['profile', 'email'],
+        redirect_url="/auth/google/callback"
+    )
+
+    app.register_blueprint(google_bp, url_prefix="/auth/google")
 
     login_manager.init_app(app)
     migrate.init_app(app, db)
     db.init_app(app)
 
+    init_oauth(app)
+
     CORS(app)
     app.register_blueprint(main_bp, url_prefix='/main')
     app.register_blueprint(auth_bp, url_prefix='/auth')
+    app.register_blueprint(game_bp, url_prefix='/game')
 
     with app.app_context():
         db.create_all()

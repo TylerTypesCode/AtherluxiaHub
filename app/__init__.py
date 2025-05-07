@@ -2,6 +2,7 @@ from .utils.error_handlers import APIError
 from .instances import db, migrate, login_manager
 from .Routes.main import main_bp
 from .Routes.auth import auth_bp
+from .Routes.admin import admin_bp
 from .Routes.game import game_bp
 from .Routes.vote import vote_bp
 from .Routes.comment import comment_bp
@@ -55,6 +56,7 @@ def create_app():
 
     app.register_blueprint(main_bp, url_prefix='/')
     app.register_blueprint(auth_bp, url_prefix='/auth')
+    app.register_blueprint(admin_bp, url_prefix='/admin')
     app.register_blueprint(game_bp, url_prefix='/game')
     app.register_blueprint(vote_bp, url_prefix='/vote')
     app.register_blueprint(comment_bp, url_prefix='/comment')

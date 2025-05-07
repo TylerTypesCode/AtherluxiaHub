@@ -1,5 +1,4 @@
 from .instances import db, migrate, login_manager
-from .Routes.auth import auth_bp
 from .Routes.main import main_bp
 from dotenv import load_dotenv
 from flask_cors import CORS
@@ -26,7 +25,6 @@ def create_app():
     db.init_app(app)
 
     CORS(app)
-    app.register_blueprint(auth_bp, url_prefix='/auth')
     app.register_blueprint(main_bp, url_prefix='/main')
 
     with app.app_context():

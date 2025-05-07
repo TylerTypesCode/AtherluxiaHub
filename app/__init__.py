@@ -4,6 +4,7 @@ from .Routes.auth import auth_bp
 from .Routes.game import game_bp
 from .Routes.vote import vote_bp
 from .Routes.comment import comment_bp
+from .Routes.search_filter import search_bp
 from dotenv import load_dotenv
 from flask_dance.contrib.google import google
 from flask_cors import CORS
@@ -45,11 +46,12 @@ def create_app():
 
     CORS(app)
 
-    app.register_blueprint(main_bp, url_prefix='/main')
+    app.register_blueprint(main_bp, url_prefix='/')
     app.register_blueprint(auth_bp, url_prefix='/auth')
     app.register_blueprint(game_bp, url_prefix='/game')
     app.register_blueprint(vote_bp, url_prefix='/vote')
     app.register_blueprint(comment_bp, url_prefix='/comment')
+    app.register_blueprint(search_bp, url_prefix='/search')
 
     with app.app_context():
         db.create_all()

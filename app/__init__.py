@@ -2,6 +2,8 @@ from .instances import db, migrate, login_manager
 from .Routes.main import main_bp
 from .Routes.auth import auth_bp
 from .Routes.game import game_bp
+from .Routes.vote import vote_bp
+from .Routes.comment import comment_bp
 from dotenv import load_dotenv
 from flask_dance.contrib.google import google
 from flask_cors import CORS
@@ -42,9 +44,12 @@ def create_app():
     init_oauth(app)
 
     CORS(app)
+
     app.register_blueprint(main_bp, url_prefix='/main')
     app.register_blueprint(auth_bp, url_prefix='/auth')
     app.register_blueprint(game_bp, url_prefix='/game')
+    app.register_blueprint(vote_bp, url_prefix='/vote')
+    app.register_blueprint(comment_bp, url_prefix='/comment')
 
     with app.app_context():
         db.create_all()

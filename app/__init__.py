@@ -5,6 +5,8 @@ from .Routes.auth import auth_bp
 from .Routes.admin import admin_bp
 from .Routes.game import game_bp
 from .Routes.vote import vote_bp
+from .Routes.notifications import notification_bp
+from .Routes.dashboard import dashboard_bp
 from .Routes.comment import comment_bp
 from .Routes.search_filter import search_bp
 from dotenv import load_dotenv
@@ -61,6 +63,8 @@ def create_app():
     app.register_blueprint(vote_bp, url_prefix='/vote')
     app.register_blueprint(comment_bp, url_prefix='/comment')
     app.register_blueprint(search_bp, url_prefix='/search')
+        app.register_blueprint(notification_bp, url_prefix='/notification')
+    app.register_blueprint(dashboard_bp, url_prefix='/dashboard')
 
     with app.app_context():
         db.create_all()

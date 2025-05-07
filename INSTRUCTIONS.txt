@@ -1,0 +1,10 @@
+ALWAYS PARSE DEVELOPMENT_DOCUMENT.txt FILE FOR 
+PROJECT REQUIREMENTS REFERENCE BEFORE WRITING ANY CODE
+OR MAKING ANY EDITS
+
+Maintain a Consistent Brand presence
+
+Stick to Effective, Working, Functional, Simple implementations when possible
+
+UTILIZE A STRUCTURED GIT With master and create Feature Branches for each new feature being worked on
+and merge finalized Feature Branches into the master cleanly.

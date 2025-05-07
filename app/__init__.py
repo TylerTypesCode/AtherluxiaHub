@@ -1,0 +1,35 @@
+from .instances import db, migrate, login_manager
+from .Routes.auth import auth_bp
+from .Routes.main import main_bp
+from dotenv import load_dotenv
+from flask_cors import CORS
+from flask import Flask
+import os
+
+load_dotenv()
+
+def create_app():
+    app = Flask(__name__)
+    app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    app.config['CORS_HEADERS'] = 'Content-Type'
+    app.config['CORS_SUPPORTS_CREDENTIALS'] = True
+    app.config['CORS_EXPOSE_HEADERS'] = ['Content-Type', 'Authorization']
+    app.config['CORS_ALLOW_HEADERS'] = ['Content-Type', 'Authorization']
+    app.config['CORS_ALLOW_METHODS'] = ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
+    app.config['CORS_ALLOW_ORIGINS'] = ['*']
+    app.config['CORS_MAX_AGE'] = 3600
+
+    login_manager.init_app(app)
+    migrate.init_app(app, db)
+    db.init_app(app)
+
+    CORS(app)
+    app.register_blueprint(auth_bp, url_prefix='/auth')
+    app.register_blueprint(main_bp, url_prefix='/main')
+
+    with app.app_context():
+        db.create_all()
+        db.session.commit()
+    return app
